@@ -1,0 +1,81 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Vista de lista -->
+    <record id="view_unicah_prestamo_equipo_list" model="ir.ui.view">
+        <field name="name">unicah.prestamo.equipo.list</field>
+        <field name="model">unicah.prestamo.equipo</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="solicitante_id"/>
+                <field name="equipo"/>
+                <field name="fecha_prestamo"/>
+                <field name="fecha_devolucion"/>
+                <field name="dias_prestamo"/>
+                <field name="estado"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista de formulario -->
+    <record id="view_unicah_prestamo_equipo_form" model="ir.ui.view">
+        <field name="name">unicah.prestamo.equipo.form</field>
+        <field name="model">unicah.prestamo.equipo</field>
+        <field name="arch" type="xml">
+            <form string="Préstamo de equipo">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="solicitante_id"/>
+                        <field name="equipo"/>
+                        <field name="fecha_prestamo"/>
+                        <field name="fecha_devolucion"/>
+                        <field name="dias_prestamo" readonly="1"/>
+                        <field name="estado"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_unicah_prestamo_equipo" model="ir.actions.act_window">
+        <field name="name">Préstamos de equipo</field>
+        <field name="res_model">unicah.prestamo.equipo</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menús -->
+    <menuitem
+        id="menu_unicah_prestamo_equipo_root"
+        name="Préstamos UNICAH"
+        sequence="60"
+    />
+
+    <menuitem
+        id="menu_unicah_prestamo_equipo"
+        name="Préstamos de equipo"
+        parent="menu_unicah_prestamo_equipo_root"
+        action="action_unicah_prestamo_equipo"
+        sequence="10"
+    />
+
+    <!-- Herencia de la vista de contactos -->
+    <record id="view_partner_form_unicah_prestamo_equipo" model="ir.ui.view">
+        <field name="name">res.partner.form.unicah.prestamo.equipo</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Préstamos UNICAH">
+                    <group>
+                        <field name="es_responsable_equipo"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
