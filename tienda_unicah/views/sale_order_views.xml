@@ -1,0 +1,34 @@
+
+<record id="sale_order_tree_tienda_unicah" model="ir.ui.view">
+    <field name="name">sale.order.list.tienda.unicah</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.sale_order_tree"/>
+    <field name="arch" type="xml">
+        <field name="partner_id" position="after">
+            <!-- TODO 3: columnas convenio_id y monto_ahorro -->
+            <field name="convenio_id"/>
+            <field name="monto_ahorro" sum="Total ahorro"/>
+        </field>
+    </field>
+</record>
+
+<record id="view_sales_order_filter_tienda_unicah" model="ir.ui.view">
+    <field name="name">sale.order.search.tienda.unicah</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+    <field name="arch" type="xml">
+        <filter name="my_sale_orders_filter" position="after">
+            <!-- TODO 4: filtro Con convenio -->
+            <filter name="con_convenio"
+                    string="Con convenio"
+                    domain="[('convenio_aplicado', '=', True)]"/>
+        </filter>
+
+        <filter name="customer" position="after">
+            <!-- TODO 5: agrupación por convenio_id -->
+            <filter name="group_by_convenio"
+                    string="Convenio"
+                    context="{'group_by': 'convenio_id'}"/>
+        </filter>
+    </field>
+</record>
